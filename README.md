@@ -4,7 +4,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![Funded by NGI Zero](https://img.shields.io/badge/Funded%20by-NGI%20Zero%20Commons-blue)](https://nlnet.nl/commonsfund/)
 
 > Analyze how well your website is prepared for AI-powered search engines — Google AI Overviews, ChatGPT Search, Perplexity, Bing Copilot, and others.
 
@@ -199,7 +198,7 @@ openseo_lens/
 | Milestone | Timeline | Status | Deliverables |
 |:----------|:---------|:-------|:-------------|
 | **M1-M2** | Month 1-2 | Skeleton | Core infrastructure + structured data analyzer |
-| **M3-M4** | Month 3-4 | Planned | AI crawlability + TDM compliance analyzer |
+| **M3-M4** | Month 3-4 | ✅ Complete | AI crawlability + TDM compliance analyzer |
 | **M5-M6** | Month 5-6 | Planned | Content extractability scoring engine |
 | **M7-M8** | Month 7-8 | Planned | Citation auditing + E-E-A-T analysis |
 | **M9-M10** | Month 9-10 | Planned | Multilingual support (EN/FR/DE/RO) + HTML reporter |
@@ -253,17 +252,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 
 ## Funding
 
-<p align="center">
-  <a href="https://nlnet.nl/commonsfund/">
-    <img src="https://nlnet.nl/logo/banner.svg" alt="NLnet Foundation" width="200">
-  </a>
-  &nbsp;&nbsp;&nbsp;
-  <a href="https://ngi.eu/">
-    <img src="https://nlnet.nl/image/logos/NGI0_tag.svg" alt="NGI Zero Commons Fund" width="200">
-  </a>
-</p>
-
-This project is funded through the [NGI Zero Commons Fund](https://nlnet.nl/commonsfund/), a fund established by [NLnet](https://nlnet.nl/) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu/) programme, under the aegis of DG Communications Networks, Content and Technology under grant agreement No 101135429.
+This project has applied for funding through the [NGI Zero Commons Fund](https://nlnet.nl/commonsfund/) (application 2026-04-0b3).
 
 ---
 
