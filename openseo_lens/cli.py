@@ -14,7 +14,7 @@ from openseo_lens.models import AnalysisResult, Severity
 
 console = Console()
 
-ANALYZER_NAMES = ["structured-data", "crawlability", "extractability", "attribution"]
+ANALYZER_NAMES = ["crawlability", "tdm", "structured-data", "extractability", "attribution"]
 
 
 @click.group()

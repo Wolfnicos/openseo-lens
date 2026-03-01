@@ -19,8 +19,9 @@ class Severity(str, Enum):
 class Category(str, Enum):
     """Analysis category."""
 
-    STRUCTURED_DATA = "structured_data"
     CRAWLABILITY = "crawlability"
+    TDM = "tdm"
+    STRUCTURED_DATA = "structured_data"
     EXTRACTABILITY = "extractability"
     ATTRIBUTION = "attribution"
 

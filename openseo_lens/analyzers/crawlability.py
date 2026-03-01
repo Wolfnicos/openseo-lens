@@ -12,15 +12,18 @@ from openseo_lens.models import Category, Score
 
 # Known AI crawler user agents
 AI_BOTS = {
-    "GPTBot": "OpenAI (ChatGPT Search)",
-    "Google-Extended": "Google (Gemini, AI Overviews)",
+    "GPTBot": "OpenAI (ChatGPT training data)",
+    "ChatGPT-User": "OpenAI (ChatGPT live browsing)",
+    "Google-Extended": "Google (Gemini training data)",
+    "GoogleOther": "Google (AI Overviews, other AI)",
     "CCBot": "Common Crawl (used by many AI models)",
-    "anthropic-ai": "Anthropic (Claude)",
+    "anthropic-ai": "Anthropic (Claude training data)",
+    "ClaudeBot": "Anthropic (Claude web search)",
     "Bytespider": "ByteDance (TikTok AI)",
     "PerplexityBot": "Perplexity AI",
-    "ClaudeBot": "Anthropic (Claude web search)",
+    "Amazonbot": "Amazon (Alexa, AI services)",
+    "meta-externalagent": "Meta (Facebook AI, LLaMA)",
     "cohere-ai": "Cohere",
-    "Applebot-Extended": "Apple (Apple Intelligence)",
 }
 
 

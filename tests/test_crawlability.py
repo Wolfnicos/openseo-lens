@@ -37,6 +37,11 @@ async def test_analyzer_handles_tdm_header(analyzer: CrawlabilityAnalyzer) -> No
 def test_ai_bots_registry() -> None:
     """AI bots registry should contain known crawlers."""
     assert "GPTBot" in AI_BOTS
+    assert "ChatGPT-User" in AI_BOTS
     assert "Google-Extended" in AI_BOTS
+    assert "GoogleOther" in AI_BOTS
     assert "anthropic-ai" in AI_BOTS
-    assert len(AI_BOTS) >= 5
+    assert "ClaudeBot" in AI_BOTS
+    assert "PerplexityBot" in AI_BOTS
+    assert "meta-externalagent" in AI_BOTS
+    assert len(AI_BOTS) == 12
