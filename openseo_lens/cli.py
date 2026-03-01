@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import sys
 
 import click
+import httpx
 from rich.console import Console
 from rich.table import Table
 
@@ -49,12 +51,11 @@ def analyze(url: str, output_format: str, output: str | None, only: str | None) 
             console.print(f"Available: {', '.join(ANALYZER_NAMES)}")
             sys.exit(1)
 
-    console.print(f"\n[bold]OpenSEO Lens v{__version__}[/bold]")
-    console.print(f"Analyzing: [cyan]{url}[/cyan]\n")
+    stderr = Console(stderr=True)
+    stderr.print(f"\n[bold]OpenSEO Lens v{__version__}[/bold]")
+    stderr.print(f"Analyzing: [cyan]{url}[/cyan]\n")
 
-    # TODO: Run analyzers and collect results
-    result = AnalysisResult(url=url)
-    console.print("[yellow]Analysis engine not yet implemented. Coming soon![/yellow]\n")
+    result = asyncio.run(_run_analysis(url, selected))
 
     if output_format == "json":
         _output_json(result, output)
@@ -62,6 +63,66 @@ def analyze(url: str, output_format: str, output: str | None, only: str | None) 
         _output_html(result, output)
     else:
         _output_text(result)
+
+
+async def _run_analysis(url: str, selected: list[str]) -> AnalysisResult:
+    """Fetch the URL and run selected analyzers."""
+    result = AnalysisResult(url=url)
+
+    # Fetch the page
+    html = ""
+    headers: dict[str, str] = {}
+    try:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=10.0) as client:
+            response = await client.get(url)
+            html = response.text
+            headers = dict(response.headers)
+    except (httpx.HTTPError, httpx.TimeoutException) as e:
+        console.print(f"[red]Failed to fetch {url}: {e}[/red]")
+        console.print("[yellow]Running analysis with empty content...[/yellow]\n")
+
+    # Run selected analyzers
+    if "crawlability" in selected:
+        from openseo_lens.analyzers.crawlability import CrawlabilityAnalyzer
+
+        analyzer = CrawlabilityAnalyzer()
+        score = await analyzer.analyze(url=url, html=html, headers=headers)
+        result.scores.append(score)
+        result.issues.extend(score.issues)
+
+    if "tdm" in selected:
+        from openseo_lens.analyzers.tdm import TdmAnalyzer
+
+        analyzer_tdm = TdmAnalyzer()
+        score = await analyzer_tdm.analyze(url=url, html=html, headers=headers)
+        result.scores.append(score)
+        result.issues.extend(score.issues)
+
+    if "structured-data" in selected:
+        from openseo_lens.analyzers.structured_data import StructuredDataAnalyzer
+
+        analyzer_sd = StructuredDataAnalyzer()
+        score = await analyzer_sd.analyze(url=url, html=html, headers=headers)
+        result.scores.append(score)
+        result.issues.extend(score.issues)
+
+    if "extractability" in selected:
+        from openseo_lens.analyzers.extractability import ExtractabilityAnalyzer
+
+        analyzer_ext = ExtractabilityAnalyzer()
+        score = await analyzer_ext.analyze(url=url, html=html, headers=headers)
+        result.scores.append(score)
+        result.issues.extend(score.issues)
+
+    if "attribution" in selected:
+        from openseo_lens.analyzers.attribution import AttributionAnalyzer
+
+        analyzer_attr = AttributionAnalyzer()
+        score = await analyzer_attr.analyze(url=url, html=html, headers=headers)
+        result.scores.append(score)
+        result.issues.extend(score.issues)
+
+    return result
 
 
 def _output_text(result: AnalysisResult) -> None:
@@ -72,9 +133,12 @@ def _output_text(result: AnalysisResult) -> None:
     table.add_column("Issues", justify="right")
 
     for score in result.scores:
+        bar_filled = round(score.value / 10)
+        bar_empty = 10 - bar_filled
+        bar = f"{'█' * bar_filled}{'░' * bar_empty}"
         table.add_row(
             score.category.value.replace("_", " ").title(),
-            f"{score.value}/{score.max_value}",
+            f"{bar}  {score.value}/{score.max_value}",
             str(len(score.issues)),
         )
 
@@ -90,9 +154,10 @@ def _output_text(result: AnalysisResult) -> None:
             Severity.INFO: "dim",
         }[issue.severity]
         console.print(f"  [{color}][{issue.severity.value.upper()}][/{color}] {issue.title}")
+        console.print(f"         {issue.recommendation}\n")
 
     if not result.issues:
-        console.print("  [green]No issues found.[/green]")
+        console.print("  [green]No issues found — all clear![/green]")
 
 
 def _output_json(result: AnalysisResult, path: str | None) -> None:
@@ -115,23 +180,32 @@ def _output_json(result: AnalysisResult, path: str | None) -> None:
                 "title": i.title,
                 "description": i.description,
                 "recommendation": i.recommendation,
+                "details": i.details,
             }
             for i in result.issues
         ],
     }
-    output = json.dumps(data, indent=2, ensure_ascii=False)
+    output_str = json.dumps(data, indent=2, ensure_ascii=False)
     if path:
         with open(path, "w") as f:
-            f.write(output)
+            f.write(output_str)
         console.print(f"[green]Report saved to {path}[/green]")
     else:
-        click.echo(output)
+        click.echo(output_str)
 
 
 def _output_html(result: AnalysisResult, path: str | None) -> None:
     """Output results as HTML."""
-    # TODO: Implement HTML reporter
-    console.print("[yellow]HTML reporter not yet implemented.[/yellow]")
+    from openseo_lens.reporters.html_reporter import HtmlReporter
+
+    reporter = HtmlReporter()
+    html = reporter.render(result)
+    if path:
+        with open(path, "w") as f:
+            f.write(html)
+        console.print(f"[green]HTML report saved to {path}[/green]")
+    else:
+        click.echo(html)
 
 
 if __name__ == "__main__":
