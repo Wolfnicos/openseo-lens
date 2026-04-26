@@ -121,7 +121,7 @@ def check_tdm_meta_tags(html: str) -> list[TdmSignal]:
     # Check <meta name="tdm-reservation" content="...">
     meta = soup.find(
         "meta",
-        attrs={"name": lambda v: v and v.lower() == "tdm-reservation"},
+        attrs={"name": lambda v: bool(v and v.lower() == "tdm-reservation")},
     )
     if meta is not None:
         content = (meta.get("content") or "").strip()  # type: ignore[union-attr]

@@ -222,8 +222,9 @@ def check_meta_robots(html: str) -> list[Issue]:
     # Find all meta robots-like tags
     meta_names = ["robots", "googlebot", "googlebot-news", "bingbot"]
     for name in meta_names:
-        target = name  # bind loop var for lambda
-        tag = soup.find("meta", attrs={"name": lambda v, t=target: v and v.lower() == t})
+        def _name_matches(value: str | None, t: str = name) -> bool:
+            return bool(value and value.lower() == t)
+        tag = soup.find("meta", attrs={"name": _name_matches})
         if tag is None:
             continue
 

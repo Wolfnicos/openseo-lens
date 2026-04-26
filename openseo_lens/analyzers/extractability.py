@@ -8,7 +8,7 @@ and citeable information.
 from __future__ import annotations
 
 from openseo_lens.analyzers import AnalyzerBase
-from openseo_lens.models import Category, Score
+from openseo_lens.models import Category, Issue, Score
 
 
 class ExtractabilityAnalyzer(AnalyzerBase):
@@ -27,7 +27,7 @@ class ExtractabilityAnalyzer(AnalyzerBase):
         - Content length and depth per section
         - Language clarity (readability metrics)
         """
-        issues = []
+        issues: list[Issue] = []
 
         # TODO: Implement extractability analysis
         # 1. Parse HTML into content blocks

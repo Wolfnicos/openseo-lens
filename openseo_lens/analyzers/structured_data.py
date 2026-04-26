@@ -133,12 +133,14 @@ def extract_microdata(html: str) -> list[MicrodataItem]:
     items: list[MicrodataItem] = []
 
     for tag in soup.find_all(attrs={"itemscope": True}):
-        item_type = tag.get("itemtype")
-        props = [
-            child.get("itemprop")
-            for child in tag.find_all(attrs={"itemprop": True})
-            if child.get("itemprop")
-        ]
+        # BeautifulSoup typing returns Union — narrow to str for our schema
+        raw_type = tag.get("itemtype")
+        item_type: str | None = raw_type if isinstance(raw_type, str) else None
+        props: list[str] = []
+        for child in tag.find_all(attrs={"itemprop": True}):
+            prop = child.get("itemprop")
+            if isinstance(prop, str):
+                props.append(prop)
         items.append(MicrodataItem(item_type=item_type, properties=props))
 
     return items

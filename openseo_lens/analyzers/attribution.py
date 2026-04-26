@@ -9,7 +9,7 @@ that AI engines use to determine citation worthiness.
 from __future__ import annotations
 
 from openseo_lens.analyzers import AnalyzerBase
-from openseo_lens.models import Category, Score
+from openseo_lens.models import Category, Issue, Score
 
 
 class AttributionAnalyzer(AnalyzerBase):
@@ -28,7 +28,7 @@ class AttributionAnalyzer(AnalyzerBase):
         - Contact information availability
         - Trust signals (HTTPS, privacy policy, terms of service)
         """
-        issues = []
+        issues: list[Issue] = []
 
         # TODO: Implement attribution analysis
         # 1. Detect author markup
