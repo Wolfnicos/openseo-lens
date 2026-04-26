@@ -91,7 +91,7 @@ def extract_jsonld_blocks(html: str) -> list[JsonLdBlock]:
             continue
 
         # Handle both single object and @graph array
-        objects = []
+        objects: list = []
         if isinstance(parsed, dict):
             graph = parsed.get("@graph")
             objects = graph if isinstance(graph, list) else [parsed]
