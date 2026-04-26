@@ -14,7 +14,6 @@ from openseo_lens.analyzers.tdm import (
 )
 from openseo_lens.models import Category, Severity
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------

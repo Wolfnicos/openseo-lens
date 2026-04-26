@@ -15,7 +15,6 @@ from openseo_lens.analyzers.crawlability import (
 )
 from openseo_lens.models import Category, Severity
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -42,7 +41,7 @@ class TestAIBotRegistry:
             assert bot in AI_BOTS, f"{bot} missing from registry"
 
     def test_each_bot_has_operator_and_weight(self) -> None:
-        for bot_name, (operator, weight) in AI_BOTS.items():
+        for _bot_name, (operator, weight) in AI_BOTS.items():
             assert isinstance(operator, str) and operator
             assert isinstance(weight, int) and weight > 0
 

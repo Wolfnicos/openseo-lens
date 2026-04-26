@@ -3,7 +3,6 @@
 import pytest
 
 from openseo_lens.analyzers.structured_data import (
-    JsonLdBlock,
     MicrodataItem,
     StructuredDataAnalyzer,
     StructuredDataSummary,
@@ -13,7 +12,6 @@ from openseo_lens.analyzers.structured_data import (
     has_rdfa,
 )
 from openseo_lens.models import Category, Severity
-
 
 # ---------------------------------------------------------------------------
 # Fixtures
@@ -206,7 +204,11 @@ class TestExtractJsonLdBlocks:
         assert blocks[0].has_valid_context is True
 
     def test_schema_type_list(self) -> None:
-        html = """<script type="application/ld+json">{"@context": "https://schema.org", "@type": ["Article", "NewsArticle"], "headline": "Test"}</script>"""
+        html = (
+            '<script type="application/ld+json">'
+            '{"@context": "https://schema.org", "@type": ["Article", "NewsArticle"], "headline": "Test"}'
+            "</script>"
+        )
         blocks = extract_jsonld_blocks(html)
         assert blocks[0].schema_type in {"Article", "NewsArticle"}
 
