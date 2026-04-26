@@ -21,6 +21,11 @@ ENV/
 *.swo
 *~
 
+# AI assistants (local config)
+.claude/
+.cursor/
+.aider*
+
 # Testing
 .pytest_cache/
 .coverage

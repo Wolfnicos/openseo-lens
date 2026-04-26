@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(pytest --cov=openseo_lens --cov-report=term-missing)"
-    ]
-  }
-}
