@@ -1,0 +1,45 @@
+name: Analyzer Proposal
+description: Propose a new analysis dimension or signal for AI search readiness
+labels: ["analyzer", "enhancement"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Proposed analyzer name
+      placeholder: "e.g. Page Speed for AI Crawlers"
+    validations:
+      required: true
+
+  - type: textarea
+    id: signals
+    attributes:
+      label: What signals would it check?
+      description: List the specific HTTP headers, HTML elements, or patterns to detect
+    validations:
+      required: true
+
+  - type: textarea
+    id: scoring
+    attributes:
+      label: Proposed scoring logic
+      description: How would you calculate 0-100? What penalizes/rewards?
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: References / specs
+      description: Links to relevant standards, bot documentation, or research
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: research
+    attributes:
+      label: Research done
+      options:
+        - label: I have verified this signal is used by at least one AI search engine
+          required: false
+        - label: No existing open source tool checks this signal
+          required: false
