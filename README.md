@@ -9,6 +9,20 @@
 
 ---
 
+## Project Status
+
+| Analyzer | Status | Test Coverage |
+|:---------|:-------|:-------------|
+| AI Crawlability | ✅ Production-ready | 94% |
+| TDM Compliance | ✅ Production-ready | 88% |
+| Structured Data | 🚧 In development | 5% |
+| Content Extractability | 🚧 In development | 5% |
+| Citation & Attribution | 🚧 In development | 5% |
+
+Funded by NLnet NGI Zero Commons Fund (proposal 2026-04-0b3, under review).
+
+---
+
 ## Why This Matters
 
 AI search engines don't list links — they **synthesize answers**. If your content isn't structured for machine reading, it becomes invisible.
@@ -55,21 +69,21 @@ Detects conflicting directives, overly restrictive configurations, and `ai.txt` 
 - Reports conflicting TDM signals across channels
 - Generates clear compliance status for non-technical stakeholders
 
-### 3. Structured Data Validation
+### 3. Structured Data Validation 🚧 In development
 - Detects and validates **JSON-LD**, **Microdata**, and **RDFa** markup
 - Checks schema.org compliance and property completeness
 - Identifies missing schemas critical for AI citation (FAQPage, HowTo, Article, Organization)
 - Scores schema completeness: required vs. optional vs. AI-critical properties
 - Reports nesting errors and property violations
 
-### 4. Content Extractability
+### 4. Content Extractability 🚧 In development
 - Evaluates how easily AI engines can extract answers from your content
 - Heading hierarchy validation (skip detection, nesting errors)
 - Semantic HTML usage scoring (`<article>`, `<section>`, `<main>`, `<nav>`)
 - Content-to-boilerplate ratio calculation
 - Answer-readiness metric: can an AI extract a clear answer per section?
 
-### 5. Citation & Attribution Auditing
+### 5. Citation & Attribution Auditing 🚧 In development
 - Analyzes whether AI engines are likely to cite your content
 - Author markup detection (schema.org Person, `rel=author`, meta tags)
 - Publication date and freshness signal extraction
@@ -112,6 +126,8 @@ openseo-lens analyze https://example.com --only extractability,attribution
 
 ## Example Output
 
+> **Note:** Example below shows v1.0 target output. In v0.1.0, AI Crawlability and TDM Compliance are fully implemented; Structured Data, Extractability, and Citation analyzers are in active development.
+
 ```
 OpenSEO Lens — AI Search Readiness Report
 ==========================================
@@ -152,7 +168,7 @@ Issues Found: 9
 | Open source | **Yes** | Yes | No | No | No |
 | No API keys required | **Yes** | Yes | Yes | No | Yes |
 | EU TDM Directive compliance | **Yes** | No | No | No | No |
-| Multilingual (EN/FR/DE/RO) | **Yes** | No | No | No | No |
+| Multilingual (EN/FR/DE/RO) | **Planned v1.0** 🚧 | No | No | No | No |
 
 ---
 

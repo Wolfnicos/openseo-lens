@@ -6,7 +6,7 @@ Thank you for your interest in contributing! This guide will help you get starte
 
 ```bash
 # Clone the repository
-git clone https://github.com/anthropics/openseo-lens.git
+git clone https://github.com/Wolfnicos/openseo-lens.git
 cd openseo-lens
 
 # Create a virtual environment
