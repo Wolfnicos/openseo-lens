@@ -18,7 +18,7 @@
 |:---------|:-------|:-------------|
 | AI Crawlability | ✅ Production-ready | 94% |
 | TDM Compliance | ✅ Production-ready | 88% |
-| Structured Data | 🚧 In development | 5% |
+| Structured Data | ✅ Production-ready | 95% |
 | Content Extractability | 🚧 In development | 5% |
 | Citation & Attribution | 🚧 In development | 5% |
 
@@ -72,7 +72,7 @@ Detects conflicting directives, overly restrictive configurations, and `ai.txt` 
 - Reports conflicting TDM signals across channels
 - Generates clear compliance status for non-technical stakeholders
 
-### 3. Structured Data Validation 🚧 In development
+### 3. Structured Data Validation
 - Detects and validates **JSON-LD**, **Microdata**, and **RDFa** markup
 - Checks schema.org compliance and property completeness
 - Identifies missing schemas critical for AI citation (FAQPage, HowTo, Article, Organization)

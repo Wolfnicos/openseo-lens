@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [Unreleased]
 
 ### Added
-- Stub analyzers for Structured Data, Content Extractability, and Citation & Attribution (interface defined, implementation in progress)
+- Structured Data analyzer: JSON-LD extraction and parsing, Microdata detection, RDFa detection, AI-critical property completeness scoring for 12 schema types (Article, FAQPage, HowTo, Product, Organization, etc.)
+- Stub analyzers for Content Extractability and Citation & Attribution (interface defined, implementation in progress)
 - GitHub Actions CI pipeline (Python 3.10–3.13 matrix)
 - Issue templates: bug report, feature request, analyzer proposal
 - Pull request template with checklist
